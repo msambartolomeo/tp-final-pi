@@ -9,7 +9,7 @@
 typedef struct listCDT * listADT;
 
 //Funciones
-listADT new ();
-void free (listADT list);
+listADT newList();
+void freeList(listADT list);
 
 #endif

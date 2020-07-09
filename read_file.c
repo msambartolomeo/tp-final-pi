@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "libraryADT.h"
 
 #define MAX_LINE_LENGTH 300
+#define MAX_NAME_LENGTH 50
 #define DELIM ";"
 
-int readFile(const char * path, const char * columnas, void (*storage) (const char * columnas, char * linea))
+int readFile(const char * path, const char * columnas, void (*storage) (const char * columnas, char * linea/*, listADT * listas */)/*, listADT * listas*/)
 {
     FILE * archivo = fopen(path, "r");
     if (archivo == NULL)
@@ -17,13 +19,13 @@ int readFile(const char * path, const char * columnas, void (*storage) (const ch
     fgets(linea, MAX_LINE_LENGTH, archivo); // salteamos la primera linea que contiene los encabezados
     while (fgets(linea, MAX_LINE_LENGTH, archivo))
     {
-        storage(columnas, linea);
+        storage(columnas, linea/*, listas */);
     }
     fclose(archivo);
     return 0;
 }
 
-void storageBarrio(const char * columnas, char * linea)
+void storageBarrio(const char * columnas, char * linea/*, listADT * listas */)
 {
     int i;
     char * token;
@@ -31,16 +33,17 @@ void storageBarrio(const char * columnas, char * linea)
     {
         if (i == linea[0])
         {
-            // guardo nombres de los barrios
+            char barrio[MAX_NAME_LENGTH] = token;
         }
-        else
+        else if (i == linea[1])
         {
-            // guardo cantidad de habitantes
+            double habitantes = atof(token);
         }
     }
+    // add listADT
 }
 
-void storageArboles(const char * columnas, char * linea)
+void storageArboles(const char * columnas, char * linea/*, listADT * listas */)
 {
     int i;
     char * token;
@@ -48,16 +51,16 @@ void storageArboles(const char * columnas, char * linea)
     {
         if (i == linea[0])
         {
-            // chequeo nombre del barrio
+            char barrio[MAX_NAME_LENGTH] = token;
         }
         else if (i == linea [1])
         {
-            // chequeo nombre del arbol
+            char nombre[MAX_NAME_LENGTH] = token;
         }
         else if (i == linea [2])
         {
-            // chequeo diametro de arbol
+            double diametro = atof(token);
         }
     }
-    // guardo en aux datos obtenidos
+    // add listADT 
 }
