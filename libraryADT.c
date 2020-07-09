@@ -14,7 +14,7 @@ typedef struct listCDT
     tNode * current; //Iterador para recorrer la lista e imprimirla
 } listCDT;
 
-listADT new ()
+listADT newList()
 {
     listADT new = calloc(1, sizeof(listCDT));
     if (new == NULL) ;
@@ -30,19 +30,35 @@ static void freeRec (tNode * first)
     free(first);
 }
 
-void free (listADT list)
+void freeList(listADT list)
 {
     freeRec(list->first);
     free(list);
     //No es necesario liberar current ya que apuntará a alguno de los nodos y será liberado automáticamente
 }
 
-tNode * addRec (tNode * first, char * name, int data, char flag)
+static tNode * addRec(tNode * first, char * name, double elem, unsigned int count, int flag, int * error)
 {
     
 }
 
-void add (listADT list, char * name, int data, int (*func) (char a[], char b[]) )
+int add1(listADT list, char * name, double elem)
 {
+    int error = 0;
+    list->first = addRec(list->first, name, elem, 0, 1, &error);
+    return error;
+}
 
+int add2(listADT list, char * name, unsigned int count)
+{
+    int error = 0;
+    list->first = addRec(list->first, name, 0, count, 0, &error);
+    return error;
+}
+
+int add3(listADT list, char * name, double elem, unsigned int count)
+{
+    int error = 0;
+    list->first = addRec(list->first, name, elem, count, 1, &error);
+    return error;
 }
