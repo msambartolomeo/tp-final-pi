@@ -1,3 +1,4 @@
+#include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "libraryADT.h"
@@ -101,37 +102,34 @@ void toBegin(listADT list)
     list->current = list->first;
 }
 
-unsigned int nextCOUNT(listADT list)
+unsigned int getCOUNT(listADT list)
 {
     if ( !hasNext(list) )
     {
         fprintf(stderr,"Error: No current node"); //mensaje de error?
         exit(1);
     }
-    unsigned int count = list->current->count;
-    return count;
+    return list->current->count;
 }
 
-double nextELEM(listADT list)
+double getELEM(listADT list)
 {
     if ( !hasNext(list) )
     {
         fprintf(stderr,"Error: No current node"); //menasaje de error?
         exit(1);
     }
-    double elem = list->current->elem;
-    return elem;
+    return list->current->elem;
 }
 
-char * nextNAME(listADT list)
+char * getNAME(listADT list)
 {
     if ( !hasNext(list) )
     {
         fprintf(stderr,"Error: No current node"); //menasaje de error?
         exit(1);
     }
-    char * name = list->current->name;
-    return name;
+   return list->current->name;
 }
 
 void next(listADT list)

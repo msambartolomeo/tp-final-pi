@@ -1,9 +1,6 @@
 #ifndef libraryADT_h
 #define libraryADT_h
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
 #define MAX_NAME 50
 
 typedef struct listCDT * listADT;
@@ -16,8 +13,9 @@ int addSinElem(listADT list, char * name);
 int addAll(listADT list, char * name, double elem);
 int hasNext(const listADT list);
 void toBegin(listADT list);
-unsigned int nextCOUNT(listADT list);
-double nextELEM(listADT list);
-char * nextNAME(listADT list);
+unsigned int getCOUNT(listADT list);
+double getELEM(listADT list);
+char * getNAME(listADT list);
 void next(listADT list);
+
 #endif
