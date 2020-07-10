@@ -20,7 +20,7 @@ typedef struct listCDT
 listADT newList()
 {
     listADT new = calloc(1, sizeof(listCDT));
-    if (new == NULL)
+    //if (new == NULL)
         //Código de error, insuficiente memoria. IF CON ;
     return new;   
 }
@@ -44,7 +44,8 @@ void freeList(listADT list)
 static tNode * addRec(tNode * first, char * name, double elem, unsigned int count, int flag, int * error)
 {
     int c;
-    if ( first == NULL || (c = strcmp(name,first->name)) < 0 ) {
+    if (first == NULL || (c = strcmp(name, first->name)) < 0)
+    {
         if (flag)
         {
             tNode * aux = calloc(1,sizeof(tNode));
@@ -53,21 +54,27 @@ static tNode * addRec(tNode * first, char * name, double elem, unsigned int coun
                 *error = 1;
                 return first;
             }
-            strcpy(aux->name,name); //aux->name = name;
-            aux->elem += elem;
+            strcpy(aux->name, name);
             aux->count += count;
+            aux->elem += elem;
             aux->tail = first;
             return aux;
         }
         else
+        {
             return first;
+        }
     }
     if ( c == 0 )
-            first->count += count;  //si son iguales los strings debo sumar los contadores pero no volver a pegar la informacion
-            first->elem += elem;
-            return first;
+    {
+        first->count += count;  //si son iguales los strings debo sumar los contadores pero no volver a pegar la informacion
+        first->elem += elem;
+        return first;
+    }
     if ( c > 0)
-        first->tail = addRec(first, name, elem, count, flag, error);
+    {
+        first->tail = addRec(first->tail, name, elem, count, flag, error);
+    }
     return first;
 }
 

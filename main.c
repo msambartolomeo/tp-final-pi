@@ -1,5 +1,7 @@
 #include "read_file.h"
 #include "libraryADT.h"
+#include "query.h"
+#include <stdio.h>
 
 #define BARRIO_ARBOLES 3
 #define NOMBRE 8
@@ -14,8 +16,8 @@ int main(int argc, char const *argv[])
         fprintf(stderr, "Wrong argument quantity");
         return 1;
     }
-    char columnasBarrio[2] = {BARRIO, HABITANTES};
-    char columnasArboles[3] = {BARRIO_ARBOLES, NOMBRE, DIAMETRO};
+    int columnasBarrio[2] = {BARRIO, HABITANTES};
+    int columnasArboles[3] = {BARRIO_ARBOLES, NOMBRE, DIAMETRO};
     listADT barrios = newList();
     listADT arboles = newList();
     listADT listas[2] = {barrios, arboles};

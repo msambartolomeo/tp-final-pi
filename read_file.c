@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "libraryADT.h"
+#include "query.h"
 
 #define MAX_LINE_LENGTH 300
 #define DELIM ";"
 
-int readFile(const char * path, const char * columnas, void (*storage) (const char * columnas, char * linea, listADT * listas), listADT * listas)
+int readFile(const char * path, const int * columnas, void (*storage) (const int * columnas, char * linea, listADT * listas), listADT * listas)
 {
     FILE * archivo = fopen(path, "r");
     if (archivo == NULL)
@@ -24,18 +25,18 @@ int readFile(const char * path, const char * columnas, void (*storage) (const ch
     return 0;
 }
 
-void storageBarrio(const char * columnas, char * linea, listADT * listas)
+void storageBarrio(const int * columnas, char * linea, listADT * listas)
 {
     int i;
     char * token, barrio[MAX_NAME];
     double habitantes;
-    for (token = strtok(linea, DELIM), i = 1; i <= linea[1]; i++, token = strtok(NULL, DELIM))
+    for (token = strtok(linea, DELIM), i = 1; i <= columnas[1]; i++, token = strtok(NULL, DELIM))
     {
-        if (i == linea[0])
+        if (i == columnas[0])
         {
             strcpy(barrio, token);
         }
-        else if (i == linea[1])
+        else if (i == columnas[1])
         {
             habitantes = atof(token);
         }
@@ -43,22 +44,22 @@ void storageBarrio(const char * columnas, char * linea, listADT * listas)
     addSinCount(listas[0], barrio, habitantes);
 }
 
-void storageArboles(const char * columnas, char * linea, listADT * listas)
+void storageArboles(const int * columnas, char * linea, listADT * listas)
 {
     int i;
     char * token, barrio[MAX_NAME], nombre[MAX_NAME];
     double diametro;
-    for (token = strtok(linea, DELIM), i = 1; i <= linea[2]; i++, token = strtok(NULL, DELIM))
+    for (token = strtok(linea, DELIM), i = 1; i <= columnas[2]; i++, token = strtok(NULL, DELIM))
     {
-        if (i == linea[0])
+        if (i == columnas[0])
         {
             strcpy(barrio, token);
         }
-        else if (i == linea [1])
+        else if (i == columnas[1])
         {
             strcpy(nombre, token);
         }
-        else if (i == linea [2])
+        else if (i == columnas[2])
         {
             diametro = atof(token);
         }

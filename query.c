@@ -1,14 +1,8 @@
 #include "libraryADT.h"
+#include <stdlib.h>
+#include <string.h>
+#include "query.h"
 #define EPSILON 0.01
-
-typedef struct qNode
-{
-    char name[MAX_NAME];
-    double elem;
-    struct qNode * tail;
-} qNode;
-
-typedef qNode * queryList;
 
 //asegurar que el listADT este en el primer nodo (toBegin)
 //crear una lista para cada query
@@ -39,24 +33,26 @@ double division (double a, double b)
 
 int compare(double num1, double num2)
 {
-    double resta = num1-num2;
+    double resta = num1 - num2;
     if (abs(resta) < EPSILON)
         return 0;
     return resta;
 }
 
-queryList add(queryList list, double elem, char * name)
+// Ordena por el valor de elem descendientemente
+queryList addInOrder(queryList list, double elem, char * name)
 {
-    if(list == NULL || ( int c = compare(elem, list->elem)) > 0 )
+    int c;
+    if(list == NULL || (c = compare(elem, list->elem)) > 0 )
     {
         queryList aux = malloc(sizeof(qNode));
         //validacion del malloc
         aux->elem = elem;
-        aux->name = name;
+        strcpy(aux->name, name);
         aux->tail = list;
         return aux;
     }
-    if ( c =< 0)
+    if (c <= 0)
         list->tail = add(list->tail, elem, name);
     return list;
 }
