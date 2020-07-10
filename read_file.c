@@ -68,7 +68,7 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
     addAll(listas[1], nombre, diametro);
 }
 
-/*int WriteFile(Tlist lista, char * name, char * encabezado)
+int writeFile(queryList lista,const char * name,const char * encabezado,const char * formato)
 {
     FILE * archivo = fopen(name,"w");
     if (archivo == NULL)
@@ -76,7 +76,13 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
         fprintf(stderr,"Error: Can't open file");
         return 1;
     }
-    fputs(encabezado,archivo);
+    fprintf(archivo,"%s\n",encabezado);
+    queryList aux = lista;
+    while (aux != NULL)
+    {    
+        fprintf(archivo, formato, aux->name, aux->elem);
+        aux = aux->tail;
+    }
     fclose(archivo);
     return 0;
-}*/
+}
