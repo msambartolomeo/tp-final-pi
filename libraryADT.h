@@ -11,7 +11,6 @@ typedef struct listCDT * listADT;
 //Funciones
 listADT newList();
 void freeList(listADT list);
-static tNode * addRec(tNode * first, char * name, double elem, unsigned int count, int flag, int * error);
 int addSinCount(listADT list, char * name, double elem);
 int addSinElem(listADT list, char * name);
 int addAll(listADT list, char * name, double elem);

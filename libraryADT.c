@@ -42,10 +42,11 @@ void freeList(listADT list)
 //El flag indica si se debe copiar la infomacion en un nuevo nodo o solamnete prestarle atencion a los contadores cuando son iguales
 static tNode * addRec(tNode * first, char * name, double elem, unsigned int count, int flag, int * error)
 {
-    if ( first == NULL || (int c = strcmp(name,first->name)) < 0 ) {
+    int c;
+    if ( first == NULL || (c = strcmp(name,first->name)) < 0 ) {
         if (flag)
         {
-            node * aux = calloc(1,sizeof(node));
+            tNode * aux = calloc(1,sizeof(tNode));
             if (aux == NULL)
             {
                 *error = 1;
@@ -65,7 +66,7 @@ static tNode * addRec(tNode * first, char * name, double elem, unsigned int coun
             first->elem += elem;
             return first;
     if ( c > 0)
-        first->tail = addRec(first, name, elem, count, flag, error)
+        first->tail = addRec(first, name, elem, count, flag, error);
     return first;
 }
 
