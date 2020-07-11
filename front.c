@@ -4,7 +4,7 @@
 #include "libraryADT.h"
 #include "query.h"
 
-#define MAX_LINE_LENGTH 300
+#define MAX_LINE_LENGTH 500
 #define DELIM ";"
 
 int readFile(const char * path, const int * columnas, void (*storage) (const int * columnas, char * linea, listADT * listas), listADT * listas)
@@ -16,7 +16,7 @@ int readFile(const char * path, const int * columnas, void (*storage) (const int
         return 1;
     }
     char linea[MAX_LINE_LENGTH];
-    fgets(linea, MAX_LINE_LENGTH, archivo); // salteamos la primera linea que contiene los encabezados
+    fgets(linea, MAX_LINE_LENGTH, archivo);        // salteamos la primera linea que contiene los encabezados.
     while (fgets(linea, MAX_LINE_LENGTH, archivo))
     {
         storage(columnas, linea, listas);
@@ -42,6 +42,7 @@ void storageBarrio(const int * columnas, char * linea, listADT * listas)
         }
     }
     addElem(listas[0], barrio, habitantes);
+    // verificar el return de addElem
 }
 
 void storageArboles(const int * columnas, char * linea, listADT * listas)
@@ -65,10 +66,12 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
         }
     }
     addCount(listas[0],barrio);
+    // verificar el return de addCount
     addAll(listas[1], nombre, diametro);
+    // verificar el return de addAll
 }
 
-int writeFile(queryList lista,const char * name,const char * encabezado,const char * formato)
+int writeFile(queryList lista, const char * name, const char * encabezado, const char * formato)
 {
     FILE * archivo = fopen(name,"w");
     if (archivo == NULL)

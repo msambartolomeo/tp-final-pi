@@ -1,36 +1,10 @@
-#include "libraryADT.h"
 #include <stdlib.h>
 #include <string.h>
+#include "libraryADT.h"
 #include "query.h"
 #define EPSILON 0.01
 
-//asegurar que el listADT este en el primer nodo (toBegin)
-//crear una lista para cada query
-
-void queries12 (listADT list, queryList list1, queryList list2) 
-{
-    while (hasNext(list))
-    {
-            add(list1, getCOUNT(list), getNAME(list)); //lo que recibe la lista 1
-            add(list2, division(getCOUNT(list), getELEM(list)), getNAME(list));  //lo que recibe la lista 2
-        next(list);
-    }
-}
-
-void query3 (listADT list, queryList list3) 
-{
-    while (hasNext(list))
-    {
-        add(list3, division(getELEM(list), getCOUNT(list)), getNAME(list)); //lo que recibe la lista 3
-        next(list);
-    }
-}
-
-double division (double a, double b) 
-{
-    return  ( (int) ((a/b)*100))/100.0;
-}
-
+// Devuleve 0 si los numeros son iguales, < 0 si num1 < num2, > 0 si num1 > num2.
 int compare(double num1, double num2)
 {
     double resta = num1 - num2;
@@ -39,7 +13,8 @@ int compare(double num1, double num2)
     return resta;
 }
 
-// Ordena por el valor de elem descendientemente
+// Recibe una queryList, un elem del tipo double y un string,
+ // al agregar ordena por el valor de elem descendientemente.
 queryList addInOrder(queryList list, double elem, char * name)
 {
     int c;
@@ -55,4 +30,29 @@ queryList addInOrder(queryList list, double elem, char * name)
     if (c <= 0)
         list->tail = add(list->tail, elem, name);
     return list;
+}
+
+// Devuelve la division de dos numeros reales truncados a dos decimales.
+double division (double a, double b) 
+{
+    return  ( (int) ((a/b)*100))/100.0;
+}
+
+void queries12 (listADT list, queryList list1, queryList list2) 
+{
+    while (hasNext(list))
+    {
+        addInOrder(list1, getCOUNT(list), getNAME(list));
+        addInOrder(list2, division(getCOUNT(list), getELEM(list)), getNAME(list));
+        next(list);
+    }
+}
+
+void query3 (listADT list, queryList list3) 
+{
+    while (hasNext(list))
+    {
+        addInOrder(list3, division(getELEM(list), getCOUNT(list)), getNAME(list));
+        next(list);
+    }
 }
