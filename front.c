@@ -41,7 +41,7 @@ void storageBarrio(const int * columnas, char * linea, listADT * listas)
             habitantes = atof(token);
         }
     }
-    addSinCount(listas[0], barrio, habitantes);
+    addElem(listas[0], barrio, habitantes);
 }
 
 void storageArboles(const int * columnas, char * linea, listADT * listas)
@@ -64,7 +64,7 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
             diametro = atof(token);
         }
     }
-    addSinElem(listas[0],barrio);
+    addCount(listas[0],barrio);
     addAll(listas[1], nombre, diametro);
 }
 

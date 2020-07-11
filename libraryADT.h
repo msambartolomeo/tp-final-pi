@@ -8,8 +8,8 @@ typedef struct listCDT * listADT;
 //Funciones
 listADT newList();
 void freeList(listADT list);
-int addSinCount(listADT list, char * name, double elem);
-int addSinElem(listADT list, char * name);
+int addElem(listADT list, char * name, double elem);
+int addCount(listADT list, char * name);
 int addAll(listADT list, char * name, double elem);
 int hasNext(const listADT list);
 void toBegin(listADT list);

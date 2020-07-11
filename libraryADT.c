@@ -78,14 +78,14 @@ static tNode * addRec(tNode * first, char * name, double elem, unsigned int coun
     return first;
 }
 
-int addSinCount(listADT list, char * name, double elem)
+int addElem(listADT list, char * name, double elem)
 {
     int error = 0;
     list->first = addRec(list->first, name, elem, 0, 1, &error);
     return error;
 }
 
-int addSinElem(listADT list, char * name)
+int addCount(listADT list, char * name)
 {
     int error = 0;
     list->first = addRec(list->first, name, 0, 1, 0, &error);
