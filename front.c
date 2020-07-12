@@ -17,7 +17,7 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
     }
     char linea[MAX_LINE_LENGTH];
     int error = 0;
-    fgets(linea, MAX_LINE_LENGTH, archivo);        // salteamos la primera linea que contiene los encabezados.
+    fgets(linea, MAX_LINE_LENGTH, archivo);        // Salteamos la primera linea que contiene los encabezados.
     while (fgets(linea, MAX_LINE_LENGTH, archivo) && !error)
     {
         error = storage(columnas, linea, listas);
@@ -31,9 +31,9 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
     return 0;
 }
 
-void storageBarrio(const int * columnas, char * linea, listADT * listas)
+int storageBarrio(const int * columnas, char * linea, listADT * listas)
 {
-    int i;
+    int i, flag;
     char * token, barrio[MAX_NAME];
     double habitantes;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[1]; i++, token = strtok(NULL, DELIM))
@@ -47,13 +47,13 @@ void storageBarrio(const int * columnas, char * linea, listADT * listas)
             habitantes = atof(token);
         }
     }
-    int flag = addElem(listas[0], barrio, habitantes); //Verifico error de memoria
-    return flag; //return addElem(...) no se eligio por claridad del codigo.
+    flag = addElem(listas[0], barrio, habitantes); // Verifico error de memoria
+    return flag; // return addElem(...) no se eligio por claridad del codigo.
 }
 
-void storageArboles(const int * columnas, char * linea, listADT * listas)
+int storageArboles(const int * columnas, char * linea, listADT * listas)
 {
-    int i;
+    int i, flag;
     char * token, barrio[MAX_NAME], nombre[MAX_NAME];
     double diametro;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[2]; i++, token = strtok(NULL, DELIM))
@@ -72,8 +72,7 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
         }
     }
     addCount(listas[0],barrio);
-
-    int flag = addAll(listas[1], nombre, diametro); //Verifico errores de memoria
+    flag = addAll(listas[1], nombre, diametro); // Verifico errores de memoria
     return flag;   
 }
 

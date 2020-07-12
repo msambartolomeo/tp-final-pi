@@ -21,7 +21,7 @@ typedef struct listCDT
 listADT newList()
 {
     listADT new = calloc(1, sizeof(listCDT));
-    if (errno == ENOMEM) //Verifico que no haya error de memoria
+    if (errno == ENOMEM) // Verifico que no haya error de memoria
         return NULL;
     return new;   
 }
@@ -53,7 +53,7 @@ static tNode * addRec(tNode * first, char * name, double elem, unsigned int coun
         if (flag)
         {
             tNode * aux = calloc(1,sizeof(tNode));
-            if (errno == ENOMEM) //Verifico que no haya error de memoria 
+            if (errno == ENOMEM) // Verifico que no haya error de memoria 
             {
                 *error = 1;
                 return first;
@@ -92,7 +92,7 @@ int addElem(listADT list, char * name, double elem)
 void addCount(listADT list, char * name)
 {
     list->first = addRec(list->first, name, 0, 1, 0, NULL); // Elem y el flag son 0 para que solo cambie el campo de count.
-    return; //No es necesario que devuelva el error porque, por cómo está diseñada, nunca puede fallar. Si no encuentra el nodo, lo ignora y no lo añade a la lista.
+    return; // No es necesario que devuelva el error porque, por cómo está diseñada, nunca puede fallar. Si no encuentra el nodo, lo ignora y no lo añade a la lista.
 }
 
 int addAll(listADT list, char * name, double elem)
