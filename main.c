@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
     error = makeQueries12(listas[0], query1, query2);
     if (error == 1) // Correspondiente a error de malloc o calloc
     {
-        freeList(listas[0]);
+        freeList(listas[0
         freeQuery(query1);
         freeQuery(query2);
         fprintf(stderr, "Error: Cannot allocate memory");
