@@ -7,21 +7,27 @@
 #define MAX_LINE_LENGTH 500
 #define DELIM ";"
 
-int readFile(const char * path, const int * columnas, void (*storage) (const int * columnas, char * linea, listADT * listas), listADT * listas)
+int readFile(const char * path, const int * columnas, int (*storage) (const int * columnas, char * linea, listADT * listas), listADT * listas)
 {
     FILE * archivo = fopen(path, "r");
     if (archivo == NULL)
     {
-        fprintf(stderr,"Error: Can't open file");
-        return 1;
+        fprintf(stderr,"Error: Can't open file\n");
+        return 2;
     }
     char linea[MAX_LINE_LENGTH];
+    int error = 0;
     fgets(linea, MAX_LINE_LENGTH, archivo);        // salteamos la primera linea que contiene los encabezados.
-    while (fgets(linea, MAX_LINE_LENGTH, archivo))
+    while (fgets(linea, MAX_LINE_LENGTH, archivo) && !error)
     {
-        storage(columnas, linea, listas);
+        error = storage(columnas, linea, listas);
     }
     fclose(archivo);
+    if (error)
+    {
+        fprintf(stderr, "Memory allocation failure\n");
+        return 1;
+    }
     return 0;
 }
 
@@ -41,8 +47,8 @@ void storageBarrio(const int * columnas, char * linea, listADT * listas)
             habitantes = atof(token);
         }
     }
-    addElem(listas[0], barrio, habitantes);
-    // verificar el return de addElem
+    int flag = addElem(listas[0], barrio, habitantes); //Verifico error de memoria
+    return flag; //return addElem(...) no se eligio por claridad del codigo.
 }
 
 void storageArboles(const int * columnas, char * linea, listADT * listas)
@@ -66,9 +72,9 @@ void storageArboles(const int * columnas, char * linea, listADT * listas)
         }
     }
     addCount(listas[0],barrio);
-    // verificar el return de addCount
-    addAll(listas[1], nombre, diametro);
-    // verificar el return de addAll
+
+    int flag = addAll(listas[1], nombre, diametro); //Verifico errores de memoria
+    return flag;   
 }
 
 int writeFile(queryList lista, const char * name, const char * encabezado, const char * formato)

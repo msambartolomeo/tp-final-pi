@@ -13,9 +13,22 @@ typedef struct qNode
 typedef qNode * queryList;
 
 // Resuelve las queries 1 y 2.
-void queries12 (listADT list, queryList list1, queryList list2);
+int makeQueries12 (listADT list, queryList list1, queryList list2);
 
 // Resuelve la query 3.
-void query3 (listADT list, queryList list3);
+int makeQuery3 (listADT list, queryList list3);
+
+// Recibe una queryList, un elem del tipo double y un string,
+// al agregar ordena por el valor de elem descendientemente.
+queryList addInOrder(queryList list, double elem, char * name, int * error);
+
+// Devuleve 0 si los numeros son iguales, < 0 si num1 < num2, > 0 si num1 > num2.
+int compare(double num1, double num2);
+
+// Devuelve la division de dos numeros reales truncados a dos decimales.
+double division (double a, double b);
+
+//Libera todos los nodos de la lista
+void freeQuery (queryList query);
 
 #endif
