@@ -52,9 +52,7 @@ int main(int argc, char const *argv[])
         return 1;
     }
     
-    queryList query1 = newQueryList();
-    queryList query2 = newQueryList();
-    queryList query3 = newQueryList();
+    queryList query1, query2, query3;
     
     error = makeQueries12(listas[0], query1, query2);
     if (error == 1) // Correspondiente a error de malloc o calloc

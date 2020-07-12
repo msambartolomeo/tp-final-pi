@@ -5,14 +5,6 @@
 #include <errno.h>
 #define EPSILON 0.01
 
-queryList newQueryList()
-{
-    queryList new = calloc(1, sizeof(tNode));
-    if (errno == ENOMEM) // Verifico que no haya error de memoria
-        return NULL;
-    return new;   
-}
-
 int compare(double num1, double num2)
 {
     double resta = num1 - num2;

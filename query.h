@@ -12,9 +12,6 @@ typedef struct qNode
 
 typedef qNode * queryList;
 
-// Crea una queryList nueva.
-queryList newQueryList();
-
 // Devuleve 0 si los numeros son iguales, < 0 si num1 < num2, > 0 si num1 > num2.
 int compare(double num1, double num2);
 
