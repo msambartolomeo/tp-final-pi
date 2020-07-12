@@ -28,27 +28,27 @@ int main(int argc, char const *argv[])
     error = readFile(argv[1], columnasBarrio, storageBarrio, listas);
     if (error == 2) // Correspondiente a no poder abrir el archivo.
     {    
-        fprintf(stderr, "Fail to open file");
+        fprintf(stderr, "Error: Fail to open file");
         return 1;
     }    
     if (error == 1) // Correspondiente a error de malloc o calloc
     {
         freeList(listas[0]);
-        fprintf(stderr, "Cannot allocate memory");
+        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
 
     error = readFile(argv[2], columnasArboles, storageArboles, listas);
     if (error == 2) // Correspondiente a no poder abrir el archivo.
     {
-        fprintf(stderr, "Fail to open file");
+        fprintf(stderr, "Error: Fail to open file");
         return 1;
     }    
     if (error == 1) // Correspondiente a error de malloc o calloc
     {
         freeList(listas[0]);
         freeList(listas[1]);
-        fprintf(stderr, "Cannot allocate memory");
+        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
     
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
         freeList(listas[0]);
         freeQuery(query1);
         freeQuery(query2);
-        fprintf(stderr, "Cannot allocate memory");
+        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
     freeList(listas[0]);
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[])
     {
         freeList(listas[1]);
         freeQuery(query3);
-        fprintf(stderr, "Cannot allocate memory");
+        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
     freeList(listas[1]);

@@ -116,9 +116,8 @@ unsigned int getCOUNT(listADT list)
 {
     if ( !hasNext(list) )
     {
-        //validacion del mensaje de error
-        //fprintf(stderr,"Error: No current node");
-        //exit(1);
+        fprintf(stderr,"Error: No current node");
+        exit(1);
     }
     return list->current->count;
 }
@@ -127,9 +126,8 @@ double getELEM(listADT list)
 {
     if ( !hasNext(list) )
     {
-        //validacion del mensaje de error
-        //fprintf(stderr,"Error: No current node");
-        //exit(1);
+        fprintf(stderr,"Error: No current node");
+        exit(1);
     }
     return list->current->elem;
 }
@@ -138,9 +136,8 @@ char * getNAME(listADT list)
 {
     if ( !hasNext(list) )
     {
-        //validacion del mensaje de error
-        //fprintf(stderr,"Error: No current node");
-        //exit(1);
+        fprintf(stderr,"Error: No current node");
+        exit(1);
     }
    return list->current->name;
 }
@@ -149,9 +146,8 @@ void next(listADT list)
 {
     if ( !hasNext(list) )
     {
-        //validacion del mensaje de error
-        //fprintf(stderr,"Error: No current node");
-        //exit(1);
+        fprintf(stderr,"Error: No current node");
+        exit(1);
     }
     list->current = list->current->tail;
 }
