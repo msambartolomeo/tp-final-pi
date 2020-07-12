@@ -23,10 +23,10 @@ queryList addInOrder(queryList list, double elem, char * name, int * error);
 double division (double a, double b);
 
 // Resuelve las queries 1 y 2.
-int makeQueries12 (listADT list, queryList list1, queryList list2);
+int makeQueries12 (listADT list, queryList * list1, queryList * list2);
 
 // Resuelve la query 3.
-int makeQuery3 (listADT list, queryList list3);
+int makeQuery3 (listADT list, queryList * list3);
 
 // Libera todos los nodos de la lista.
 void freeQuery (queryList query);

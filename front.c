@@ -12,8 +12,8 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
     FILE * archivo = fopen(path, "r");
     if (archivo == NULL)
     {
-        fprintf(stderr,"Error: Can't open file\n");
-        return 2;
+        fprintf(stderr,"Error: Can't read file\n");
+        return 1;
     }
     char linea[MAX_LINE_LENGTH];
     int error = 0;
@@ -81,7 +81,7 @@ int writeFile(queryList lista, const char * name, const char * encabezado, const
     FILE * archivo = fopen(name,"w");
     if (archivo == NULL)
     {
-        fprintf(stderr,"Error: Can't open file");
+        fprintf(stderr,"Error: Can't write on file");
         return 1;
     }
     fprintf(archivo,"%s\n",encabezado);

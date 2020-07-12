@@ -26,60 +26,68 @@ int main(int argc, char const *argv[])
 
     int error;
     error = readFile(argv[1], columnasBarrio, storageBarrio, listas);
-    if (error == 2) // Correspondiente a no poder abrir el archivo.
+    if (error) // Correspondiente a no poder abrir el archivo.
     {    
-        fprintf(stderr, "Error: Fail to open file");
+        freeList(listas[0]);
+        freeList(listas[1]);
         return 1;
     }    
-    if (error == 1) // Correspondiente a error de malloc o calloc
-    {
-        freeList(listas[0]);
-        fprintf(stderr, "Error: Cannot allocate memory");
-        return 1;
-    }
 
     error = readFile(argv[2], columnasArboles, storageArboles, listas);
-    if (error == 2) // Correspondiente a no poder abrir el archivo.
-    {
-        fprintf(stderr, "Error: Fail to open file");
-        return 1;
-    }    
-    if (error == 1) // Correspondiente a error de malloc o calloc
+    if (error) // Correspondiente a error de malloc o calloc
     {
         freeList(listas[0]);
         freeList(listas[1]);
-        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
+
+    queryList query1 = NULL, query2 = NULL, query3 = NULL;
     
-    queryList query1, query2, query3;
-    
-    error = makeQueries12(listas[0], query1, query2);
-    if (error == 1) // Correspondiente a error de malloc o calloc
+    error = makeQueries12(listas[0], &query1, &query2);
+    freeList(listas[0]);
+    if (error) // Correspondiente a error de malloc o calloc
     {
-        freeList(listas[0
+        freeList(listas[1]);
         freeQuery(query1);
         freeQuery(query2);
         fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
-    freeList(listas[0]);
 
-    error = makeQuery3(listas[1], query3);
-    if (error == 1) // Correspondiente a error de malloc o calloc
+    error = makeQuery3(listas[1], &query3);
+    freeList(listas[1]);
+    if (error) // Correspondiente a error de malloc o calloc
     {
-        freeList(listas[1]);
+        freeQuery(query1);
+        freeQuery(query2);
         freeQuery(query3);
         fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
-    freeList(listas[1]);
+    
 
-    writeFile(query1, "query1.csv", "BARRIO;ARBOLES", "%s;%.0f\n");
+    error = writeFile(query1, "query1.csv", "BARRIO;ARBOLES", "%s;%.0f\n");
     freeQuery(query1);
-    writeFile(query2, "query2.csv", "BARRIO;ARBOLES_POR_HABITANTE", "%s;%.2f\n");
+    if (error)
+    {
+        freeQuery(query2);
+        freeQuery(query3);
+        return 1;
+    }
+    
+    error = writeFile(query2, "query2.csv", "BARRIO;ARBOLES_POR_HABITANTE", "%s;%.2f\n");
     freeQuery(query2);
-    writeFile(query3, "query3.csv", "NOMBRE_CIENTIFICO;PROMEDIO_DIAMETRO", "%s;%.2f\n");
+    if (error)
+    {
+        freeQuery(query3);
+        return 1;
+    }
+
+    error = writeFile(query3, "query3.csv", "NOMBRE_CIENTIFICO;PROMEDIO_DIAMETRO", "%s;%.2f\n");
     freeQuery(query3);
+    if (error)
+    {
+        return 1;
+    }
     return 0;
 }
