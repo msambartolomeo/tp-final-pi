@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 
     int error;
     error = readFile(argv[1], columnasBarrio, storageBarrio, listas);
-    if (error) // Correspondiente a no poder abrir el archivo.
+    if (error)
     {    
         freeList(listas[0]);
         freeList(listas[1]);
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
     }    
 
     error = readFile(argv[2], columnasArboles, storageArboles, listas);
-    if (error) // Correspondiente a error de malloc o calloc
+    if (error)
     {
         freeList(listas[0]);
         freeList(listas[1]);
@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
     
     error = makeQueries12(listas[0], &query1, &query2);
     freeList(listas[0]);
-    if (error) // Correspondiente a error de malloc o calloc
+    if (error)
     {
         freeList(listas[1]);
         freeQuery(query1);
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 
     error = makeQuery3(listas[1], &query3);
     freeList(listas[1]);
-    if (error) // Correspondiente a error de malloc o calloc
+    if (error)
     {
         freeQuery(query1);
         freeQuery(query2);

@@ -7,8 +7,8 @@
 typedef struct node
 {
     char name[MAX_NAME];
-    unsigned int count;  // Contador de cantidad de árboles por barrio o de cantidad de árboles cada especie.
-    double elem;         // Almacenar la cantidad de habitantes por barrio o la suma de todos los diametros de los arboles de una especie.
+    int count;    // Contador de cantidad de árboles por barrio o de cantidad de árboles cada especie.
+    double elem; // Almacenar la cantidad de habitantes por barrio o la suma de todos los diametros de los arboles de una especie.
     struct node * tail;
 } tNode;
 
@@ -21,7 +21,7 @@ typedef struct listCDT
 listADT newList()
 {
     listADT new = calloc(1, sizeof(listCDT));
-    if (errno == ENOMEM) // Verifico que no haya error de memoria
+    if (errno == ENOMEM) // Verifico que no haya error de memoria.
         return NULL;
     return new;   
 }
@@ -42,10 +42,11 @@ void freeList(listADT list)
     // No es necesario liberar current ya que apuntará a alguno de los nodos y será liberado automáticamente.
 }
 
-// Recibe un tNode, un string, un elem del tipo double, un count (1 o 0), un flag (1 o 0) y un puntero a error.
-// El flag indica si se debe copiar la infomacion en un nuevo nodo o solamnete incrementar los contadores,
-// cuando el string recibido es igual a un ya existente en la lsta.
-static tNode * addRec(tNode * first, char * name, double elem, unsigned int count, int flag, int * error)
+// Recibe un tNode, un string, un elem del tipo double, un count, un flag (1 o 0) y un puntero a error.
+// El valor count indica cuanto sumarle al campo utilizado como 
+// El flag indica si se debe copiar la informacion en un nuevo nodo o solamenete incrementar los contadores,
+// cuando el string recibido es igual a uno ya existente en la lista.
+static tNode * addRec(tNode * first, char * name, double elem, int count, int flag, int * error)
 {
     int c;
     if (first == NULL || (c = strcmp(name, first->name)) < 0)
@@ -53,7 +54,7 @@ static tNode * addRec(tNode * first, char * name, double elem, unsigned int coun
         if (flag)
         {
             tNode * aux = calloc(1,sizeof(tNode));
-            if (errno == ENOMEM) // Verifico que no haya error de memoria 
+            if (errno == ENOMEM) // Verifico que no haya error de memoria.
             {
                 *error = 1;
                 return first;
@@ -86,12 +87,12 @@ int addElem(listADT list, char * name, double elem)
 {
     int error = 0;
     list->first = addRec(list->first, name, elem, 0, 1, &error); // El flag esta en 1 porque hay agregar.
-    return error;
+    return error;                                                // El count esta en 0 porque no se quiere incrementar el contador.
 }
 
 void addCount(listADT list, char * name)
 {
-    list->first = addRec(list->first, name, 0, 1, 0, NULL); // Elem y el flag son 0 para que solo cambie el campo de count.
+    list->first = addRec(list->first, name, 0, 1, 0, NULL); // Elem y el flag son 0 para que solo incrementar el campo de count.
     return; // No es necesario que devuelva el error porque, por cómo está diseñada, nunca puede fallar. Si no encuentra el nodo, lo ignora y no lo añade a la lista.
 }
 
@@ -112,12 +113,11 @@ void toBegin(listADT list)
     list->current = list->first;
 }
 
-unsigned int getCOUNT(listADT list)
+int getCOUNT(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
-        exit(1);
+        return -1;
     }
     return list->current->count;
 }
@@ -126,8 +126,7 @@ double getELEM(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
-        exit(1);
+        return -1;      // El campo elem es considerado posivito.
     }
     return list->current->elem;
 }
@@ -136,18 +135,17 @@ char * getNAME(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
-        exit(1);
+        return NULL;
     }
    return list->current->name;
 }
 
-void next(listADT list)
+int next(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
-        exit(1);
+        return 1;
     }
     list->current = list->current->tail;
+    return 0;
 }

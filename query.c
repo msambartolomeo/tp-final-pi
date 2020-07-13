@@ -7,7 +7,7 @@
 
 int compare(double num1, double num2)
 {
-    return num1*100 - num2*100;
+    return num1*100 - num2*100;  // Multiplicamos por 100 porque sabemos que estan truncados a dos decimales.
 }
 
 queryList addInOrder(queryList list, double elem, char * name, int * error)
@@ -16,7 +16,7 @@ queryList addInOrder(queryList list, double elem, char * name, int * error)
     if (list == NULL || (c = compare(elem, list->elem)) > 0 )
     {
         queryList aux = calloc(1,sizeof(qNode));
-        if (errno == ENOMEM)
+        if (errno == ENOMEM)  // Verifico que no haya error de memoria.
         {
             *error = 1;
             return list;
@@ -46,8 +46,13 @@ int makeQueries12(listADT list, queryList * query1, queryList * query2)
     {
         char * name = getNAME(list);
         int count = getCOUNT(list);
+        double elem = getELEM(list);
+        if (name == NULL || count == -1 || elem || -1)
+        {
+            return 1;   // Error: no se pudo obtener los parametros deseados.
+        }
         *query1 = addInOrder(*query1, count, name, &error);
-        *query2 = addInOrder(*query2, division(count, getELEM(list)),name, &error);
+        *query2 = addInOrder(*query2, division(count, elem),name, &error);
         next(list);
     }
     return error;
@@ -59,7 +64,14 @@ int makeQuery3 (listADT list, queryList * query3)
     toBegin(list);
     while (hasNext(list) && !error)
     {
-        *query3 = addInOrder(*query3, division(getELEM(list), getCOUNT(list)), getNAME(list), &error);
+        char * name = getNAME(list);
+        int count = getCOUNT(list);
+        double elem = getELEM(list);
+        if (name == NULL || count == -1 || elem || -1)
+        {
+            return 1;   // Error: no se pudo obtener los parametros deseados.
+        }
+        *query3 = addInOrder(*query3, division(elem, count), name, &error);
         next(list);
     }
     return error;

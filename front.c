@@ -4,7 +4,7 @@
 #include "libraryADT.h"
 #include "query.h"
 
-#define MAX_LINE_LENGTH 500
+#define MAX_LINE_LENGTH 300
 #define DELIM ";"
 
 int readFile(const char * path, const int * columnas, int (*storage) (const int * columnas, char * linea, listADT * listas), listADT * listas)
@@ -25,7 +25,7 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
     fclose(archivo);
     if (error)
     {
-        fprintf(stderr, "Memory allocation failure\n");
+        fprintf(stderr, "Error: Memory allocation failure\n");
         return 1;
     }
     return 0;
@@ -33,7 +33,7 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
 
 int storageBarrio(const int * columnas, char * linea, listADT * listas)
 {
-    int i, flag;
+    int i, error;
     char * token, barrio[MAX_NAME];
     double habitantes;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[1]; i++, token = strtok(NULL, DELIM))
@@ -47,13 +47,13 @@ int storageBarrio(const int * columnas, char * linea, listADT * listas)
             habitantes = atof(token);
         }
     }
-    flag = addElem(listas[0], barrio, habitantes); // Verifico error de memoria
-    return flag; // return addElem(...) no se eligio por claridad del codigo.
+    error = addElem(listas[0], barrio, habitantes); // Verifico error de memoria.
+    return error; // return addElem(...) no se eligio por claridad del codigo.
 }
 
 int storageArboles(const int * columnas, char * linea, listADT * listas)
 {
-    int i, flag;
+    int i, error;
     char * token, barrio[MAX_NAME], nombre[MAX_NAME];
     double diametro;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[2]; i++, token = strtok(NULL, DELIM))
@@ -72,7 +72,7 @@ int storageArboles(const int * columnas, char * linea, listADT * listas)
         }
     }
     addCount(listas[0],barrio);
-    flag = addAll(listas[1], nombre, diametro); // Verifico errores de memoria
+    error = addAll(listas[1], nombre, diametro); // Verifico errores de memoria.
     return flag;   
 }
 
