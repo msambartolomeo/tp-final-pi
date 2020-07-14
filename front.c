@@ -34,13 +34,13 @@ int readFile(const char * path, const int * columnas, int (*storage) (const int 
 int storageBarrio(const int * columnas, char * linea, listADT * listas)
 {
     int i, error;
-    char * token, barrio[MAX_NAME];
+    char * token, * barrio;
     double habitantes;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[1]; i++, token = strtok(NULL, DELIM))
     {
         if (i == columnas[0])
         {
-            strcpy(barrio, token);
+            barrio = token;
         }
         else if (i == columnas[1])
         {
@@ -54,17 +54,17 @@ int storageBarrio(const int * columnas, char * linea, listADT * listas)
 int storageArboles(const int * columnas, char * linea, listADT * listas)
 {
     int i, error;
-    char * token, barrio[MAX_NAME], nombre[MAX_NAME];
+    char * token, * barrio, * nombre;
     double diametro;
     for (token = strtok(linea, DELIM), i = 1; i <= columnas[2]; i++, token = strtok(NULL, DELIM))
     {
         if (i == columnas[0])
         {
-            strcpy(barrio, token);
+            barrio = token;
         }
         else if (i == columnas[1])
         {
-            strcpy(nombre, token);
+            nombre = token;
         }
         else if (i == columnas[2])
         {
