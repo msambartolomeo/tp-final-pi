@@ -10,7 +10,7 @@ int compare(double num1, double num2)
     return num1*100 - num2*100;  // Multiplicamos por 100 porque sabemos que estan truncados a dos decimales.
 }
 
-queryList addInOrder(queryList list, double elem, char * name, int * error)
+queryList addInOrder(queryList list, double elem, const char * name, int * error)
 {
     int c;
     if (list == NULL || (c = compare(elem, list->elem)) > 0 )
@@ -38,7 +38,7 @@ double division (double a, double b)
     return  ((int) ((a/b)*100))/100.0;
 }
 
-int makeQueries12(listADT list, queryList * query1, queryList * query2) 
+int makeQueries12(const listADT list, queryList * query1, queryList * query2) 
 {
     int error = 0;
     toBegin(list);
@@ -55,7 +55,7 @@ int makeQueries12(listADT list, queryList * query1, queryList * query2)
     return error;
 }
 
-int makeQuery3 (listADT list, queryList * query3) 
+int makeQuery3 (const listADT list, queryList * query3) 
 {
     int error = 0;
     toBegin(list);

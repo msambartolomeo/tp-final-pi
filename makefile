@@ -8,34 +8,34 @@ OBJECTS=main.o front.o query.o libraryADT.o
 DEFINE_VAN=-D BARRIO_ARBOLES=13 -D NOMBRE=7 -D DIAMETRO=16
 DEFINE_BUE=-D BARRIO_ARBOLES=3 -D NOMBRE=8 -D DIAMETRO=12
 
-VAN: objects_VAN
+VAN: objectsVAN
 	$(COMPILER) $(OBJECTS) -o $(OUTPUT_VAN)
 
-BUE: objects_BUE
+BUE: objectsBUE
 	$(COMPILER) $(OBJECTS) -o $(OUTPUT_BUE)
 
 all: VAN BUE
 
-objects_VAN: DEFINE+=$(DEFINE_VAN)
-objects_VAN:
+objectsVAN: DEFINE+=$(DEFINE_VAN)
+objectsVAN:
 	$(COMPILER) $(DEFINE) -c $(FILES)
 
-objects_BUE: DEFINE+=$(DEFINE_BUE)
-objects_BUE:
+objectsBUE: DEFINE+=$(DEFINE_BUE)
+objectsBUE:
 	$(COMPILER) $(DEFINE) -c $(FILES)
 
 debugVAN: COMPILER+=$(DEBUG_PARAMETERS)
 debugVAN: VAN
 
-debug_BUE: COMPILER+=$(DEBUG_PARAMETERS)
-debug_BUE: BUE
+debugBUE: COMPILER+=$(DEBUG_PARAMETERS)
+debugBUE: BUE
 
 debug: debugVAN debugBUE
 
-clean_queries:
+clear_queries:
 	rm query*.csv
 
-clean_objects:
+clear_objects:
 	rm $(OBJECTS)
 
 clear_BUE:

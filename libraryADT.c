@@ -46,7 +46,7 @@ void freeList(listADT list)
 // El valor count indica cuanto sumarle al campo utilizado como 
 // El flag indica si se debe copiar la informacion en un nuevo nodo o solamenete incrementar los contadores,
 // cuando el string recibido es igual a uno ya existente en la lista.
-static tNode * addRec(tNode * first, char * name, double elem, int count, int flag, int * error)
+static tNode * addRec(tNode * first, const char * name, double elem, int count, int flag, int * error)
 {
     int c;
     if (first == NULL || (c = strcmp(name, first->name)) < 0)
@@ -84,21 +84,21 @@ static tNode * addRec(tNode * first, char * name, double elem, int count, int fl
     return first;
 }
 
-int addElem(listADT list, char * name, double elem)
+int addElem(listADT list, const char * name, double elem)
 {
     int error = 0;
     list->first = addRec(list->first, name, elem, 0, 1, &error); // El flag esta en 1 porque hay agregar.
     return error;                                                // El count esta en 0 porque no se quiere incrementar el contador.
 }
 
-int addCount(listADT list, char * name)
+int addCount(listADT list, const char * name)
 {
     int error = 0;
     list->first = addRec(list->first, name, 0, 1, 0, &error); // Elem y el flag son 0 para que solo incrementar el campo de count.
     return error; // Si el name del nodo es distinto a los ya presentes en la lista, no lo agrega y devuelve 1. Nunca agrega nodos nuevos.
 }
 
-int addAll(listADT list, char * name, double elem)
+int addAll(listADT list, const char * name, double elem)
 {
     int error = 0;
     list->first = addRec(list->first, name, elem, 1, 1, &error);
@@ -115,7 +115,7 @@ void toBegin(listADT list)
     list->current = list->first;
 }
 
-int getCOUNT(listADT list)
+int getCOUNT(const listADT list)
 {
     if ( !hasNext(list) )
     {
@@ -124,7 +124,7 @@ int getCOUNT(listADT list)
     return list->current->count;
 }
 
-double getELEM(listADT list)
+double getELEM(const listADT list)
 {
     if ( !hasNext(list) )
     {
@@ -133,7 +133,7 @@ double getELEM(listADT list)
     return list->current->elem;
 }
 
-char * getNAME(listADT list)
+char * getNAME(const listADT list)
 {
     if ( !hasNext(list) )
     {
