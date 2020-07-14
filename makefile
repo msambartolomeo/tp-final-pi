@@ -38,12 +38,16 @@ clear_queries:
 clear_objects:
 	rm $(OBJECTS)
 
-clear_BUE:
+clearBUE:
 	rm $(OUTPUT_BUE)
 
-clear_VAN:
+clearVAN:
 	rm $(OUTPUT_VAN)
 
-clear: clear_BUE clear_VAN
+clearBUE_all: clearBUE clear_objects clear_queries
+
+clearVAN_all: clearVAN clear_objects clear_queries
+
+clear: clearBUE clearVAN
 
 clear_all: clear clear_objects clear_queries
