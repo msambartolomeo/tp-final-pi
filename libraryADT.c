@@ -67,6 +67,7 @@ static tNode * addRec(tNode * first, char * name, double elem, int count, int fl
         }
         else
         {
+            *error = 1;
             return first;
         }
     }
@@ -90,10 +91,11 @@ int addElem(listADT list, char * name, double elem)
     return error;                                                // El count esta en 0 porque no se quiere incrementar el contador.
 }
 
-void addCount(listADT list, char * name)
+int addCount(listADT list, char * name)
 {
-    list->first = addRec(list->first, name, 0, 1, 0, NULL); // Elem y el flag son 0 para que solo incrementar el campo de count.
-    return; // No es necesario que devuelva el error porque, por cómo está diseñada, nunca puede fallar. Si no encuentra el nodo, lo ignora y no lo añade a la lista.
+    int error = 0;
+    list->first = addRec(list->first, name, 0, 1, 0, &error); // Elem y el flag son 0 para que solo incrementar el campo de count.
+    return error; // Si el name del nodo es distinto a los ya presentes en la lista, no lo agrega y devuelve 1. Nunca agrega nodos nuevos.
 }
 
 int addAll(listADT list, char * name, double elem)
@@ -117,7 +119,6 @@ int getCOUNT(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
         return -1;
     }
     return list->current->count;
@@ -127,7 +128,6 @@ double getELEM(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
         return -1;      // El campo elem es considerado posivito.
     }
     return list->current->elem;
@@ -137,7 +137,6 @@ char * getNAME(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
         return NULL;
     }
    return list->current->name;
@@ -147,7 +146,6 @@ int next(listADT list)
 {
     if ( !hasNext(list) )
     {
-        fprintf(stderr,"Error: No current node");
         return 1;
     }
     list->current = list->current->tail;

@@ -71,7 +71,11 @@ int storageArboles(const int * columnas, char * linea, listADT * listas)
             diametro = atof(token);
         }
     }
-    addCount(listas[0],barrio);
+    error = addCount(listas[0],barrio);
+    if (error)
+    {
+        printf("Barrio en archivo arboles no perteneciente al archivo barrios");
+    }
     error = addAll(listas[1], nombre, diametro); // Verifico errores de memoria.
     return error;   
 }

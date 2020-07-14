@@ -12,15 +12,15 @@ listADT newList();
 void freeList(listADT list);
 
 // Recibe una listADT, un string y un parametro del tipo double positivo para agregarlos a la estructura,
-// y setea el contador en 0. Devuelve 1 si hubo errores, 0 sino.
+// y setea el contador en 0. Devuelve 1 si hubo errores de memoria, 0 sino.
 int addElem(listADT list, char * name, double elem);
 
 // Recibe una listADT y un string para compararlo con aquellos presentes en la estructura,
-// y setea el contador en 1 para incrementar.
-void addCount(listADT list, char * name);
+// y setea el contador en 1 para incrementar. Devuelve 1 si hubo errores, 0 sino.
+int addCount(listADT list, char * name);
 
 // Recibe una listADT, un string y un parametro del tipo double positivo para agregarlos a estructura,
-// y setea el contador en 1. Devuelve 1 si hubo errores, 0 sino.
+// y setea el contador en 1. Devuelve 1 encuentra un string nuevo, 0 sino.
 int addAll(listADT list, char * name, double elem);
 
 // Devuelve un 1 si el current node es distinto de NULL, 0 sino.
