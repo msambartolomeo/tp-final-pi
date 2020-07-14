@@ -3,12 +3,6 @@
 #include "query.h"
 #include <stdio.h>
 
-#define BARRIO_ARBOLES 3  // 13
-#define NOMBRE 8          // 7
-#define DIAMETRO 12       // 16
-#define BARRIO 1
-#define HABITANTES 2
-
 int main(int argc, char const *argv[])
 {
     if (argc != 3)
