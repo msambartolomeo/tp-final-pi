@@ -18,6 +18,14 @@ int main(int argc, char const *argv[])
     listas[0] = newList(); // Lista de barrios, con cantidad de habitantes y arboles.
     listas[1] = newList(); // Lista de especies, con sumatoria de diametros y cantidad de arboles.
 
+    if (listas[0] == NULL || listas[1] == NULL) //Validamos que no hayan errores de memoria.
+    {
+        if (listas[0] != NULL)
+            freeList(listas[0]);
+        fprintf(stderr, "Memory allocation failure");
+        return 1;
+    }
+
     int error;
     error = readFile(argv[1], columnasBarrio, storageBarrio, listas);
     if (error)
