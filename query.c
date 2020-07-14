@@ -46,13 +46,10 @@ int makeQueries12(listADT list, queryList * query1, queryList * query2)
     {
         char * name = getNAME(list);
         int count = getCOUNT(list);
-        double elem = getELEM(list);
-        if (name == NULL || count == -1 || elem || -1)
-        {
-            return 1;   // Error: no se pudo obtener los parametros deseados.
-        }
         *query1 = addInOrder(*query1, count, name, &error);
-        *query2 = addInOrder(*query2, division(count, elem),name, &error);
+        *query2 = addInOrder(*query2, division(count, getELEM(list);),name, &error);
+        // No verificamos el return de las funciones getNAME, getELEM y getCOUNT porque si falla la validacion del hasNext se corta el while,
+        // mientras que hasNext devulva que el nodo usado para obtener la informacion es valido, las funciones getNAME, getELEM y getCOUNT no fallaran.
         next(list);
     }
     return error;
@@ -64,14 +61,9 @@ int makeQuery3 (listADT list, queryList * query3)
     toBegin(list);
     while (hasNext(list) && !error)
     {
-        char * name = getNAME(list);
-        int count = getCOUNT(list);
-        double elem = getELEM(list);
-        if (name == NULL || count == -1 || elem || -1)
-        {
-            return 1;   // Error: no se pudo obtener los parametros deseados.
-        }
-        *query3 = addInOrder(*query3, division(elem, count), name, &error);
+        *query3 = addInOrder(*query3, division(getELEM(list);, getCOUNT(list);), getNAME(list);, &error);
+        // No verificamos el return de las funciones getNAME, getELEM y getCOUNT porque si falla la validacion del hasNext se corta el while,
+        // mientras que hasNext devulva que el nodo usado para obtener la informacion es valido, las funciones getNAME, getELEM y getCOUNT no fallaran.
         next(list);
     }
     return error;

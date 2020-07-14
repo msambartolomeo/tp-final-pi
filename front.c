@@ -73,7 +73,7 @@ int storageArboles(const int * columnas, char * linea, listADT * listas)
     }
     addCount(listas[0],barrio);
     error = addAll(listas[1], nombre, diametro); // Verifico errores de memoria.
-    return flag;   
+    return error;   
 }
 
 int writeFile(queryList lista, const char * name, const char * encabezado, const char * formato)

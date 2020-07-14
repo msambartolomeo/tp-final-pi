@@ -117,6 +117,7 @@ int getCOUNT(listADT list)
 {
     if ( !hasNext(list) )
     {
+        fprintf(stderr,"Error: No current node");
         return -1;
     }
     return list->current->count;
@@ -126,6 +127,7 @@ double getELEM(listADT list)
 {
     if ( !hasNext(list) )
     {
+        fprintf(stderr,"Error: No current node");
         return -1;      // El campo elem es considerado posivito.
     }
     return list->current->elem;
@@ -135,6 +137,7 @@ char * getNAME(listADT list)
 {
     if ( !hasNext(list) )
     {
+        fprintf(stderr,"Error: No current node");
         return NULL;
     }
    return list->current->name;
@@ -144,6 +147,7 @@ int next(listADT list)
 {
     if ( !hasNext(list) )
     {
+        fprintf(stderr,"Error: No current node");
         return 1;
     }
     list->current = list->current->tail;

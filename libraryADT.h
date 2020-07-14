@@ -29,16 +29,20 @@ int hasNext(const listADT list);
 // Redirecciona el puntero current a la direccion de memoria donde apunta el first.
 void toBegin(listADT list);
 
-// Devuelve en su nombre el campo count del current node.
-unsigned int getCOUNT(listADT list);
+// Devuelve en su nombre el campo count del current node existente,
+// o devuelve -1 si no hay current node.
+int getCOUNT(listADT list);
 
-// Devuelve en su nombre el campo elem del current node.
+// Devuelve en su nombre el campo elem del current node existente,
+// o devuelve -1 si no hay current node.
 double getELEM(listADT list);
 
-// Devuelve en su nombre el campo name del current node.
+// Devuelve en su nombre el campo name del current node existente,
+// o devuelve NULL si no hay current node.
 char * getNAME(listADT list);
 
 // Redirecciona el puntero current a la direccion de memoria del siguiente nodo.
-void next(listADT list);
+// Devuelve un 1 si no puede pasar al siguiente nodo, 0 sino.
+int next(listADT list);
 
 #endif
