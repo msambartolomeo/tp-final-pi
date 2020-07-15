@@ -32,4 +32,4 @@ Utilizando los parámetros debugBUE y debugVAN se puede compilar los archivos fu
 
 Los ejecutables se llamarán arbolesADT seguido por el nombre de la ciudad. En este caso, arbolesADTBUE y arbolesADTVAN. 
 
-Al ejecutar, se deben agregar como argumentos los archivos .csv de donde se extraerá la información. El primer argumento debe ser el archivo de donde se extrae la información de los árboles; y el segundo debe ser de donde se extrae la información de los barrios. Por ejemplo, ./arbolesADTBUE ../arbolesBUE.csv ../barriosBUE.csv.
+Al ejecutar, se deben agregar como argumentos los archivos .csv de donde se extraerá la información. El primer argumento debe ser el archivo de donde se extrae la información de los árboles; y el segundo debe ser de donde se extrae la información de los barrios. Por ejemplo, ./arbolesADTBUE ../arbolesBUE.csv ../barriosBUE.csv. No debe esperarse el funcionamiento correcto de otra forma.

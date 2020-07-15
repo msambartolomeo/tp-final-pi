@@ -36,7 +36,7 @@ int storageBarrio(const int * columnas, char * linea, listADT * listas)
     int i, error;
     char * token, * barrio;
     double habitantes;
-    for (token = strtok(linea, DELIM), i = 1; i <= columnas[1]; i++, token = strtok(NULL, DELIM))
+    for (token = strtok(linea, DELIM), i = 1; i <= columnas[1] && token != NULL; i++, token = strtok(NULL, DELIM))
     {
         if (i == columnas[0])
         {
@@ -56,7 +56,7 @@ int storageArboles(const int * columnas, char * linea, listADT * listas)
     int i, error;
     char * token, * barrio, * nombre;
     double diametro;
-    for (token = strtok(linea, DELIM), i = 1; i <= columnas[2]; i++, token = strtok(NULL, DELIM))
+    for (token = strtok(linea, DELIM), i = 1; i <= columnas[2] && token != NULL; i++, token = strtok(NULL, DELIM))
     {
         if (i == columnas[0])
         {
