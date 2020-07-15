@@ -4,6 +4,7 @@
 #include "query.h"
 #include <errno.h>
 #include <stdio.h>
+#define EPSILON 0.01
 
 int compare(double num1, double num2)
 {
@@ -22,11 +23,9 @@ queryList addInOrder(queryList list, double elem, const char * name, int * error
             return list;
         }
         aux->elem = elem;
-        strcpy(aux->name, name);
+        strncpy(aux->name, name, MAX_NAME);
         aux->tail = list;
-        
         return aux;
-        
     }
     if (c <= 0)
         list->tail = addInOrder(list->tail, elem, name, error);
@@ -35,6 +34,10 @@ queryList addInOrder(queryList list, double elem, const char * name, int * error
 
 double division (double a, double b) 
 {
+    if (abs(b) < EPSILON) // verifico division por 0
+    {
+        return -1;   
+    }
     return  ((int) ((a/b)*100))/100.0;
 }
 
@@ -46,8 +49,14 @@ int makeQueries12(const listADT list, queryList * query1, queryList * query2)
     {
         char * name = getNAME(list);
         int count = getCOUNT(list);
+        double div = division(count, getELEM(list));
+        if (div == -1)
+        {
+            error = 2; // verifico division por 0
+            break;   
+        }
         *query1 = addInOrder(*query1, count, name, &error);
-        *query2 = addInOrder(*query2, division(count, getELEM(list)),name, &error);
+        *query2 = addInOrder(*query2, div ,name, &error);
         // No verificamos el return de las funciones getNAME, getELEM y getCOUNT porque si falla la validacion del hasNext se corta el while,
         // mientras que hasNext devulva que el nodo usado para obtener la informacion es valido, las funciones getNAME, getELEM y getCOUNT no fallaran.
         next(list);
@@ -61,7 +70,13 @@ int makeQuery3 (const listADT list, queryList * query3)
     toBegin(list);
     while (hasNext(list) && !error)
     {
-        *query3 = addInOrder(*query3, division(getELEM(list), getCOUNT(list)), getNAME(list), &error);
+        double div = division(getELEM(list), getCOUNT(list));
+        if (div == -1)
+        {
+            error = 2; // verifico division por 0
+            break;
+        }
+        *query3 = addInOrder(*query3, div, getNAME(list), &error);
         // No verificamos el return de las funciones getNAME, getELEM y getCOUNT porque si falla la validacion del hasNext se corta el while,
         // mientras que hasNext devulva que el nodo usado para obtener la informacion es valido, las funciones getNAME, getELEM y getCOUNT no fallaran.
         next(list);

@@ -74,7 +74,7 @@ int storageArboles(const int * columnas, char * linea, listADT * listas)
     error = addCount(listas[0],barrio);
     if (error)
     {
-        printf("Barrio en archivo arboles no perteneciente al archivo barrios");
+        printf("Barrio %s del archivo arboles no pertenece a archivo barrios, ignorando\n",barrio);
     }
     error = addAll(listas[1], nombre, diametro); // Verifico errores de memoria.
     return error;   

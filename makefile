@@ -33,16 +33,16 @@ debugBUE: BUE
 debug: debugVAN debugBUE
 
 clear_queries:
-	rm query*.csv
+	rm -rf query*.csv
 
 clear_objects:
-	rm $(OBJECTS)
+	rm -rf $(OBJECTS)
 
 clearBUE:
-	rm $(OUTPUT_BUE)
+	rm -rf $(OUTPUT_BUE)
 
 clearVAN:
-	rm $(OUTPUT_VAN)
+	rm -rf $(OUTPUT_VAN)
 
 clearBUE_all: clearBUE clear_objects clear_queries
 

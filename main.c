@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 {
     if (argc != 3)
     {
-        fprintf(stderr, "Wrong argument quantity");
+        fprintf(stderr, "Error: Wrong argument quantity");
         return 1;
     }
     
@@ -22,12 +22,12 @@ int main(int argc, char const *argv[])
     {
         if (listas[0] != NULL)
             freeList(listas[0]);
-        fprintf(stderr, "Memory allocation failure");
+        fprintf(stderr, "Error: Memory allocation failure");
         return 1;
     }
 
     int error;
-    error = readFile(argv[1], columnasBarrio, storageBarrio, listas);
+    error = readFile(argv[2], columnasBarrio, storageBarrio, listas);
     if (error)
     {    
         freeList(listas[0]);
@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
         return 1;
     }    
 
-    error = readFile(argv[2], columnasArboles, storageArboles, listas);
+    error = readFile(argv[1], columnasArboles, storageArboles, listas);
     if (error)
     {
         freeList(listas[0]);
@@ -49,10 +49,17 @@ int main(int argc, char const *argv[])
     freeList(listas[0]);
     if (error)
     {
+        if (error == 1)
+        {
+            fprintf(stderr, "Error: Memory allocation failure");
+        }
+        else
+        {
+            fprintf(stderr, "Error: Tried to divide by cero");
+        }
         freeList(listas[1]);
         freeQuery(query1);
         freeQuery(query2);
-        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
 
@@ -60,10 +67,17 @@ int main(int argc, char const *argv[])
     freeList(listas[1]);
     if (error)
     {
+        if (error == 1)
+        {
+            fprintf(stderr, "Error: Memory allocation failure");
+        }
+        else
+        {
+            fprintf(stderr, "Error: Tried to divide by cero");
+        }
         freeQuery(query1);
         freeQuery(query2);
         freeQuery(query3);
-        fprintf(stderr, "Error: Cannot allocate memory");
         return 1;
     }
     

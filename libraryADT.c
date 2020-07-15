@@ -59,7 +59,7 @@ static tNode * addRec(tNode * first, const char * name, double elem, int count, 
                 *error = 1;
                 return first;
             }
-            strcpy(aux->name, name);
+            strncpy(aux->name, name, MAX_NAME);
             aux->count += count;
             aux->elem += elem;
             aux->tail = first;
